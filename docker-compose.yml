@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  mysql:
+    image: 'mysql:5.7'
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - '3306:3306'
+    networks:
+      - twotier
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"] 
+      interval: 10s   
+      timeout: 5s  
+      retries: 5
+  backend:
+    image: 'pritamcalsoft/flaskapp:latest'
+    container_name: flaskapp
+    ports:
+      - '5000:5000'
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_DB: mydb
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - twotier
+networks:
+  twotier:
+    external: true
+
