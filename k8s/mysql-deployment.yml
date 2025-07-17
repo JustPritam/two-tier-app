@@ -17,31 +17,13 @@ spec:
       containers:
         - name: mysql-ctr
           image: mysql:5.7
-          livenessProbe:
-            exec:
-              command:
-                - mysqladmin
-                - ping
-                - -h
-                - localhost
-            initialDelaySeconds: 20
-            periodSeconds: 10
-          readinessProbe:
-            exec:
-              command:
-                - mysqladmin
-                - ping
-                - -h
-                - localhost
-            initialDelaySeconds: 10
-            periodSeconds: 5
           env:
             - name: MYSQL_ROOT_PASSWORD                
-              value: "admin"          # this is your mysql's service clusture IP, Make sure to change it with yours
+              value: "admin"       
             - name: MYSQL_PASSWORD
               value: "admin"
             - name: MYSQL_USER
-              value: "root"
+              value: "admin"
             - name: MYSQL_DATABASE
               value: "mydb"     
           ports:
