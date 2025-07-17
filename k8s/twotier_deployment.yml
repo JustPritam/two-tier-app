@@ -21,9 +21,9 @@ spec:
           image: pritamcalsoft/flaskapp:latest
           env:
             - name: MYSQL_HOST
-              value: "mysql"
+              value: "10.99.254.78"
             - name: MYSQL_USER
-              value: "root"
+              value: "admin"
             - name: MYSQL_PASSWORD
               value: "admin"
             - name: MYSQL_DB
